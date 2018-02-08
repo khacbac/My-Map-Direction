@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.androidtutorialpoint.googlemapsdrawroute.MapsActivity">
+    tools:context=".View.MapsActivity">
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -11,7 +11,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đây là nút vẽ đường đi nha chó Tuấn"
+        android:text="Draw Path"
         android:onClick="onBtnDrawClick"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
