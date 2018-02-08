@@ -45,6 +45,7 @@ public class MapsActivity extends BaseMapActivity implements IeFetchUrlView, IeD
         mapFragment.getMapAsync(this);
     }
 
+    // Dòng ni lờ khi load được map thành công.
     @Override
     public void onMapReady(GoogleMap googleMap) {
         super.onMapReady(googleMap);
@@ -53,6 +54,7 @@ public class MapsActivity extends BaseMapActivity implements IeFetchUrlView, IeD
         ieDataParsePresenter = new DataParsePresenter(this);
     }
 
+    // Dòng ni lờ khi chọn 1 địa điệm ợ trên kì map.
     @Override
     public void onMapClick(LatLng latLng) {
         // Already two locations
@@ -67,31 +69,37 @@ public class MapsActivity extends BaseMapActivity implements IeFetchUrlView, IeD
         MarkerOptions options = new MarkerOptions();
         // Setting the position of the marker
         options.position(latLng);
+        //  Dòng ni lờ chọn màu cho kì maker cụa mình.
         options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-        // Add new marker to the Google Map Android API V2
+        // Dòng ni lờ thêm kì maker ợ chộ mình vừa chọn.
         mMap.addMarker(options);
     }
 
     @Override
     public void successFetchUrl(String result) {
+        // Dòng ni lờ khi lấy được dự liệu thành công,thực hiện pạt dự liệu.
         ieDataParsePresenter.parseTask(result);
     }
 
     @Override
     public void errorFetchUrl() {
+        // Dòng ni lờ in ra lội khi mờ ko lấy được dự liệu.
         ToastUltils.showToast(this,"Cannot fetch url");
     }
 
     @Override
     public void successParsePolyline(PolylineOptions lineOptions) {
+        // Dòng ni lờ vẹ pạt dự liệu thành công,bắt đầu vẹ đường đi dựa 2 điệm.
         mMap.addPolyline(lineOptions);
     }
 
     @Override
     public void errorParsePolyline() {
+        // Dòng ni lờ in ra lội khi mờ ko pạt được pô ly ne.
         ToastUltils.showToast(this,"Cannot parse polyline");
     }
 
+    // Dòng ni lờ khi bấm vu kì bất tần vẹ đường.
     public void onBtnDrawClick(View view) {
         for (int i = 0; i < markerPoints.size() - 1; i++) {
             LatLng origin = markerPoints.get(i);
@@ -99,8 +107,9 @@ public class MapsActivity extends BaseMapActivity implements IeFetchUrlView, IeD
             // Getting URL to the Google Directions API
             String url = MapUltils.getUrl(origin, dest);
             Log.d("onMapClick", url.toString());
+            // Dòng ni lờ bắt đầu gửi cấy rì quét lấy dự liệu.
             ieFetchUrlPresenter.fetchUrl(url);
-            //move map camera
+            // Di chuyển cấy cam mê ra.
             mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
         }
